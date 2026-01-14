@@ -21,8 +21,17 @@
     (dolist (item items)
       (setf curr-name (getf item :name))
       (when (and prev-name (string< curr-name prev-name))
-        (error "Incorrect order for item ~a" curr-name))
+        (error "~a - Not in alphabetical order" curr-name))
       (setf prev-name curr-name))))
+
+(defun validate-bio-length (items)
+  "Check that bio entries do not exceed 80 characters."
+  (dolist (item items)
+    (let ((bio (getf item :bio))
+          (max-len 80))
+      (when (and bio (> (length bio) max-len))
+        (error "~a - Bio of length ~a exceeds ~a characters"
+               (getf item :name) (length bio) max-len)))))
 
 (defun make-opml-outline (item)
   "Create an outline element for the specified blog entry."
@@ -41,7 +50,7 @@
     (format s "<?xml version=\"1.0\" encoding=\"UTF-8\"?>~%")
     (format s "<opml version=\"2.0\">~%")
     (format s "  <head>~%")
-    (format s "    <title>HN Personal Blogs</title>~%")
+    (format s "    <title>HN Blogs</title>~%")
     (format s "  </head>~%")
     (format s "  <body>~%")
     (format s "    <outline text=\"HN Blogs\" title=\"HN Blogs\">~%")
@@ -55,7 +64,13 @@
   "Create an HTML link."
   (with-output-to-string (s)
     (when href
-      (format s "        <a href=\"~a\">~a</a>~%" href text))))
+      (format s "          <a href=\"~a\">~a</a>~%" href text))))
+
+(defun make-html-bio (bio)
+  "Create HTML snippet to display bio."
+  (with-output-to-string (s)
+    (when bio
+      (format s "        <p>~a</p>~%" bio))))
 
 (defun make-html-card (item)
   "Create an HTML section for the specified blog entry."
@@ -69,7 +84,7 @@
     (format s (make-html-link (getf item :feed) "Feed"))
     (format s (make-html-link (getf item :hnuid) "HN"))
     (format s "        </nav>~%")
-    (format s "        <p>~a</p>~%" (or (getf item :bio) ""))
+    (format s (make-html-bio (getf item :bio)))
     (format s "      </section>~%")))
 
 (defun make-html (items)
@@ -78,7 +93,7 @@
     (format s "<!DOCTYPE html>~%")
     (format s "<html lang=\"en\">~%")
     (format s "  <head>~%")
-    (format s "    <title>HN Personal Blogs</title>~%")
+    (format s "    <title>HN Blogs</title>~%")
     (format s "    <meta charset=\"UTF-8\">~%")
     (format s "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">~%")
     (format s "    <link rel=\"stylesheet\" href=\"style.css\">~%")
@@ -86,7 +101,7 @@
     (format s "    <script src=\"script.js\"></script>~%")
     (format s "  </head>~%")
     (format s "  <body>~%")
-    (format s "    <h1>HN Personal Blogs</h1>~%")
+    (format s "    <h1>HN Blogs</h1>~%")
     (format s "    <main>~%")
     (loop for item in items
           do (format s "~a" (make-html-card item)))
@@ -105,6 +120,7 @@
   "Create artefacts."
   (let ((blogs (read-blogs)))
     (validate-name-order blogs)
+    (validate-bio-length blogs)
     (write-file "blogs.opml" (make-opml blogs))
     (write-file "index.html" (make-html blogs))))
 

@@ -1,5 +1,7 @@
+all: site lint
+
 site:
-	sbcl --noinform --eval '(setf *break-on-signals* t)' --script site.lisp
+	sbcl --noinform --load site.lisp --quit
 
 loop:
 	while true; do make site; sleep 5; done
@@ -14,3 +16,6 @@ push:
 	git push origin --tags
 	git push cb --all
 	git push cb --tags
+
+lint:
+	tidy -q -e index.html
