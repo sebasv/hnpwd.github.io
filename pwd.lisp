@@ -13,12 +13,6 @@
   :hnuid "xorvoid"
   :bio "Writes about low-level programming and mathematics.")
 
-  (:name "Captain's Quarters"
-  :site "https://quarters.captaintouch.com/"
-  :feed "https://quarters.captaintouch.com/blog/posts.xml"
-  :hnuid "capitain"
-  :bio "Palm-OS game dev.  Ramblings about retro-tech and other nostalgia.")
-
  (:name "Chris Morgan"
   :site "https://chrismorgan.info/"
   :blog "https://chrismorgan.info/blog/"
@@ -39,17 +33,9 @@
   :blog "https://blog.jgc.org/"
   :feed "https://blog.jgc.org/feeds/posts/default"
   :about "https://en.wikipedia.org/wiki/John_Graham-Cumming"
+
   :hnuid "jgc"
   :bio "Original writer of POPFile.  Member of the board of directors at Cloudflare.")
-
- (:name "Joseph Szymborski"
-  :site "https://jszym.com/"
-  :blog "https://jszym.com/blog/"
-  :feed "https://jszym.com/index.xml"
-  :about "https://jszym.com/about/"
-  :hnuid "jszymborski"
-  :bio "Computational biology researcher.  Writes about technology and society.")
-
 
  (:name "Karl Knechtel"
   :site "https://zahlman.github.io/"
@@ -71,20 +57,6 @@
   :feed "https://nchagnet.pages.dev/rss.xml"
   :hnuid "nchagnet"
   :bio "Writes about physics, technology and data science.")
-
- (:name "Phil Booth"
-  :site "https://philbooth.me/"
-  :blog "https://philbooth.me/blog"
-  :feed "https://philbooth.me/blog/atom.xml"
-  :hnuid "philbo"
-  :bio "Progressive working class software engineer and dog person.")
-
- (:name "Philip I. Thomas"
-  :site "https://philipithomas.com/"
-  :blog "https://contraption.co/"
-  :feed "https://contraption.co/rss/"
-  :hnuid "philip1209"
-  :bio "Writes about crafting digital tools.")
 
  (:name "Sam Broner"
   :site "https://sambroner.com/"
@@ -119,6 +91,12 @@
   :feed "https://xeiaso.net/blog.rss"
   :hnuid "xena"
   :bio "Creator of Anubis.  Technical educator, conference speaker and Twitch streamer.")
+
+ (:name "Sebastiaan Vermeulen"
+  :site "https://vqi.io/"
+  :blog "https://vqi.io/blog/"
+  :hnuid "sebasv_"
+  :bio "Data Scientist, Open Source contributor. Writes about solving problems.")
 
  (:name ""
   :site ""
